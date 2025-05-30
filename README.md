@@ -102,8 +102,7 @@ git clone https://github.com/Aeerien/TheCatApp.git
 
 ## 📸 Screenshots
 
-```markdown
-![Breed List](docs/screenshots/breed_list.png)
-![Breed Detail](docs/screenshots/breed_detail.png)
-![Breed Photo Details](docs/screenshots/breed_list.png)
-```
+<img src="https://github.com/user-attachments/assets/22173fd5-23ea-4993-b29c-3281ca048647" width="150"/>
+<img src="https://github.com/user-attachments/assets/12f82285-02b4-44ca-80c0-fb9864fdb66e" width="150"/>
+<img src="https://github.com/user-attachments/assets/8cbd8ffc-7982-44e6-865f-2ed7fbd69fc5" width="150"/>
+<img src="https://github.com/user-attachments/assets/e4ec5383-e225-4d7c-950d-cdbf5843a3f5" width="150"/>
