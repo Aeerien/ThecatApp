@@ -1,9 +1,3 @@
-//
-//  BreedImageContainerView.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
@@ -39,7 +33,7 @@ final class BreedImageContainerView: UIView {
     
     private lazy var retryButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Повторить загрузку", for: .normal)
+        button.setTitle("Retry loading", for: .normal)
         button.addTarget(self, action: #selector(retryTapped), for: .touchUpInside)
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -92,8 +86,8 @@ final class BreedImageContainerView: UIView {
         retryButton.isHidden = false
         
         UIView.transition(with: imageView,
-                         duration: 0.3,
-                         options: .transitionCrossDissolve) {
+                          duration: 0.3,
+                          options: .transitionCrossDissolve) {
             self.imageView.contentMode = .center
             self.imageView.image = self.placeholderImage
         }
@@ -104,11 +98,10 @@ final class BreedImageContainerView: UIView {
         retryButton.isHidden = true
         
         UIView.transition(with: imageView,
-                         duration: 0.3,
-                         options: .transitionCrossDissolve) {
+                          duration: 0.3,
+                          options: .transitionCrossDissolve) {
             self.imageView.contentMode = .scaleAspectFill
             self.imageView.image = image
         }
     }
 }
-

@@ -1,9 +1,3 @@
-//
-//  StatView.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
@@ -54,4 +48,3 @@ final class StatView: UIView {
         valueLabel.text = String(value)
     }
 }
-

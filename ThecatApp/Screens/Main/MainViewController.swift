@@ -1,9 +1,3 @@
-//
-//  MainViewController.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
@@ -34,7 +28,7 @@ final class MainViewController: UIViewController {
     }
     private var initialListWidth: CGFloat = 0
     private var lastNonMinimumWidth: CGFloat = 300
-
+    
     init(breedListViewController: BreedListViewController,
          breedDetailViewController: BreedDetailViewController) {
         self.breedListViewController = breedListViewController
@@ -53,7 +47,7 @@ final class MainViewController: UIViewController {
         setupDelegates()
         setupGestures()
         
-        navigationItem.title = "Породы кошек"
+        navigationItem.title = "Cat Breeds"
         
         Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { _ in
             ImageCacheManager.shared.printCacheStatus()
@@ -119,7 +113,7 @@ final class MainViewController: UIViewController {
             dividerView.widthAnchor.constraint(equalToConstant: 8)
         ])
         
-        let initialWidth = view.bounds.width * 0.3 // 30% от ширины экрана
+        let initialWidth = view.bounds.width * 0.3
         listWidthConstraint = breedListViewController.view.widthAnchor.constraint(equalToConstant: initialWidth)
         listWidthConstraint?.isActive = true
     }
@@ -164,7 +158,7 @@ final class MainViewController: UIViewController {
             newWidth = max(minWidth, min(newWidth, maxWidth))
             
             if newWidth > minWidth {
-                lastNonMinimumWidth = newWidth // Сохраняем последнюю не минимальную ширину
+                lastNonMinimumWidth = newWidth // Save the last non-minimum width
             }
             
             UIView.animate(withDuration: 0.1) {
@@ -207,13 +201,12 @@ final class MainViewController: UIViewController {
     
     private func animateToWidth(_ width: CGFloat) {
         UIView.animate(withDuration: 0.3,
-                      delay: 0,
-                      usingSpringWithDamping: 0.8,
-                      initialSpringVelocity: 0.2,
-                      options: .curveEaseOut) {
+                       delay: 0,
+                       usingSpringWithDamping: 0.8,
+                       initialSpringVelocity: 0.2,
+                       options: .curveEaseOut) {
             self.listWidthConstraint?.constant = width
             self.view.layoutIfNeeded()
         }
     }
 }
-

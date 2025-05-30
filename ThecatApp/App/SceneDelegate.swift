@@ -1,16 +1,10 @@
-//
-//  SceneDelegate.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     private var appCoordinator: AppCoordinator?
-
+    
     @available(iOS 13.0, *)
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,
@@ -24,15 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.appCoordinator = coordinator
         coordinator.start()
     }
-
+    
     func sceneDidDisconnect(_ scene: UIScene) { }
-
+    
     func sceneDidBecomeActive(_ scene: UIScene) { }
-
+    
     func sceneWillResignActive(_ scene: UIScene) { }
-
+    
     func sceneWillEnterForeground(_ scene: UIScene) { }
-
+    
     func sceneDidEnterBackground(_ scene: UIScene) { }
 }
 

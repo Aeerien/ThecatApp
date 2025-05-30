@@ -1,13 +1,7 @@
-//
-//  ViewControllerFactory.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
-/// Протокол для создания view controllers
+// Protocol for creating view controllers
 protocol ViewControllerFactoryProtocol {
     func makeMainViewController() -> MainViewController
     func makeBreedListViewController() -> BreedListViewController
@@ -15,7 +9,7 @@ protocol ViewControllerFactoryProtocol {
     func makePhotoGalleryViewController(breedId: String, title: String) -> PhotoGalleryViewController
 }
 
-/// Класс для создания view controllers с правильной инъекцией зависимостей
+// Class for creating view controllers with proper dependency injection
 final class ViewControllerFactory: ViewControllerFactoryProtocol {
     private let apiService: APIServiceProtocol
     private let imageLoader: ImageLoaderServiceProtocol & ImagePrefetchingProtocol
@@ -33,7 +27,7 @@ final class ViewControllerFactory: ViewControllerFactoryProtocol {
         let breedListVC = makeBreedListViewController()
         let breedDetailVC = makeBreedDetailViewController()
         return MainViewController(breedListViewController: breedListVC,
-                                breedDetailViewController: breedDetailVC)
+                                  breedDetailViewController: breedDetailVC)
     }
     
     func makeBreedListViewController() -> BreedListViewController {
@@ -61,4 +55,3 @@ final class ViewControllerFactory: ViewControllerFactoryProtocol {
         return vc
     }
 }
-

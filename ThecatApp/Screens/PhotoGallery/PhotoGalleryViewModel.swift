@@ -1,20 +1,14 @@
-//
-//  PhotoGalleryViewModel.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 import Foundation
 
-/// Делегат для обновления UI галереи фотографий
+// Delegate for updating the photo gallery UI
 protocol PhotoGalleryViewModelDelegate: AnyObject {
     func didUpdatePhotos()
     func didReceiveError(_ error: Error)
 }
 
-/// ViewModel для управления галереей фотографий породы
+// ViewModel for managing the breed photo gallery
 final class PhotoGalleryViewModel {
     private let apiService: APIServiceProtocol
     private let imageLoader: ImageLoaderServiceProtocol & ImagePrefetchingProtocol
@@ -38,22 +32,18 @@ final class PhotoGalleryViewModel {
         currentTask?.cancel()
     }
     
-    /// Загружает изображение по URL
     func loadImage(for url: String) async throws -> UIImage {
         return try await imageLoader.loadImage(from: url)
     }
     
-    /// Запускает предварительную загрузку изображений
     func prefetchImages(urls: [String]) {
         imageLoader.prefetchImages(at: urls)
     }
     
-    /// Отменяет предварительную загрузку изображений
     func cancelPrefetching(urls: [String]) {
         imageLoader.cancelPrefetching(at: urls)
     }
     
-    /// Загружает следующую страницу фотографий
     func loadNextPage() {
         currentTask?.cancel()
         currentTask = Task {
@@ -76,4 +66,3 @@ final class PhotoGalleryViewModel {
         }
     }
 }
-

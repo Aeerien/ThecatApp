@@ -1,9 +1,3 @@
-//
-//  BreedListViewController.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
@@ -109,4 +103,3 @@ extension BreedListViewController: BreedListViewModelDelegate {
         AlertPresenter.showError(error, on: self)
     }
 }
-

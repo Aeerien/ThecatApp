@@ -1,9 +1,3 @@
-//
-//  PhotoCell.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
@@ -37,7 +31,7 @@ final class PhotoCell: UICollectionViewCell {
     
     private lazy var retryButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Повторить", for: .normal)
+        button.setTitle("Retry", for: .normal)
         button.addTarget(self, action: #selector(retryButtonTapped), for: .touchUpInside)
         button.isHidden = true
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -149,4 +143,3 @@ final class PhotoCell: UICollectionViewCell {
         retryButton.isHidden = true
     }
 }
-

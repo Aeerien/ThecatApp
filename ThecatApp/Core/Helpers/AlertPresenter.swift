@@ -1,17 +1,11 @@
-//
-//  AlertPresenter.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
-/// Утилита для показа алертов
+// Utility for displaying alerts
 enum AlertPresenter {
     static func showError(_ error: Error, on viewController: UIViewController) {
         let alert = UIAlertController(
-            title: "Ошибка",
+            title: "Error",
             message: error.localizedDescription,
             preferredStyle: .alert
         )

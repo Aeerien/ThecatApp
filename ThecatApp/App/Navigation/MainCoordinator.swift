@@ -1,19 +1,13 @@
-//
-//  MainCoordinator.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
-/// Делегат для навигации из экрана деталей породы
+// Delegate for navigation from the breed detail screen
 protocol BreedDetailNavigationDelegate: AnyObject {
-    /// Показывает галерею фотографий для породы
+    // Displays a photo gallery for the selected breed
     func showGallery(for breedId: String, title: String)
 }
 
-/// Координатор основного flow приложения
+// Coordinator of the main application flow
 final class MainCoordinator: NSObject, Coordinator {
     var childCoordinators: [Coordinator] = []
     private weak var window: UIWindow?
@@ -27,7 +21,7 @@ final class MainCoordinator: NSObject, Coordinator {
         super.init()
     }
     
-    /// Запускает основной flow приложения
+    // Starts the main application flow
     func start() {
         let mainVC = factory.makeMainViewController()
         mainVC.breedDetailViewController.navigationDelegate = self

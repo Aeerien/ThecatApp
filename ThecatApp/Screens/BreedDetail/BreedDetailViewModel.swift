@@ -1,17 +1,11 @@
-//
-//  BreedDetailViewModel.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
-/// ViewModel для отображения детальной информации о породе
+// ViewModel for displaying detailed information about a breed
 final class BreedDetailViewModel: BreedDetailViewModelProtocol {
     typealias State = BreedDetailState
     
-    /// Состояния экрана детальной информации
+    // States of the breed detail screen
     enum BreedDetailState {
         case initial
         case loading
@@ -24,7 +18,7 @@ final class BreedDetailViewModel: BreedDetailViewModelProtocol {
     private let imageLoader: ImageLoaderServiceProtocol
     private let cacheService: CacheServiceProtocol
     private var currentTask: Task<Void, Never>?
-
+    
     private(set) var breed: Breed?
     private(set) var breedImage: UIImage?
     
@@ -42,7 +36,7 @@ final class BreedDetailViewModel: BreedDetailViewModelProtocol {
         currentTask?.cancel()
     }
     
-    /// Устанавливает породу для отображения и запускает загрузку изображения
+    // Sets the breed to display and starts image loading
     func setBreed(_ breed: Breed) {
         currentTask?.cancel()
         self.breed = breed
@@ -56,7 +50,7 @@ final class BreedDetailViewModel: BreedDetailViewModelProtocol {
         loadBreedImage(breed)
     }
     
-    /// Загружает изображение для породы
+    // Loads the image for the breed
     private func loadBreedImage(_ breed: Breed) {
         currentTask = Task { [weak self] in
             guard let self = self else { return }
@@ -84,7 +78,6 @@ final class BreedDetailViewModel: BreedDetailViewModelProtocol {
         }
     }
     
-    /// Загружает и кэширует изображение по URL
     private func loadAndCacheImage(from url: String) async throws {
         let image = try await imageLoader.loadImage(from: url)
         if !Task.isCancelled {
@@ -92,7 +85,7 @@ final class BreedDetailViewModel: BreedDetailViewModelProtocol {
         }
     }
     
-    /// Обновляет UI после загрузки изображения
+    // Updates the UI after the image is loaded
     @MainActor
     private func updateImage(_ image: UIImage) {
         breedImage = image
@@ -100,4 +93,3 @@ final class BreedDetailViewModel: BreedDetailViewModelProtocol {
         delegate?.didUpdateBreedImage()
     }
 }
-

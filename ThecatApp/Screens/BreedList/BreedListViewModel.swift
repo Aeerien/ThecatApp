@@ -1,19 +1,13 @@
-//
-//  BreedListViewModel.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import Foundation
 
-/// Делегат для обновления UI при изменениях в списке пород
+// Delegate for updating the UI when the breed list changes
 protocol BreedListViewModelDelegate: AnyObject {
     func didUpdateBreeds()
     func didReceiveError(_ error: Error)
 }
 
-/// ViewModel для управления списком пород кошек
+// ViewModel for managing the list of cat breeds
 final class BreedListViewModel: BreedListViewModelProtocol {
     typealias State = BreedListState
     
@@ -36,7 +30,7 @@ final class BreedListViewModel: BreedListViewModelProtocol {
     var hasBreeds: Bool {
         !breeds.isEmpty
     }
-
+    
     private var isLoading: Bool {
         if case .loading = state {
             return true
@@ -44,12 +38,12 @@ final class BreedListViewModel: BreedListViewModelProtocol {
         return false
     }
     
-    /// Создает ViewModel с указанным API сервисом
+    // Creates a ViewModel with the specified API service
     init(apiService: APIServiceProtocol = APIService()) {
         self.apiService = apiService
     }
     
-    /// Загружает список пород
+    // Loads the list of breeds
     func fetchBreeds() {
         guard !isLoading else { return }
         
@@ -75,25 +69,24 @@ final class BreedListViewModel: BreedListViewModelProtocol {
         }
     }
     
-    /// Возвращает породу по индексу из массива breeds
+    // Returns a breed by index from the breeds array
     func breed(at index: Int) -> Breed {
         return breeds[index]
     }
     
-    /// Проверяет, является ли индекс допустимым для массива пород
+    // Checks if the index is valid for the breeds array
     func isValidIndex(_ index: Int) -> Bool {
         breeds.indices.contains(index)
     }
     
-    /// Поиск породы по ID
+    // Finds a breed by its ID
     func findBreed(by id: String) -> Breed? {
         breeds.first { $0.id == id }
     }
     
-    /// Сортирует породы по имени
+    // Sorts breeds by name
     func sortByName() {
         breeds.sort { $0.name < $1.name }
         delegate?.didUpdateBreeds()
     }
 }
-

@@ -1,13 +1,6 @@
-//
-//  APIEndpoint.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import Foundation
 
-/// Эндпоинты API
 enum APIEndpoint {
     case breeds
     case imageById(String)

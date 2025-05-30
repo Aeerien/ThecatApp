@@ -1,9 +1,3 @@
-//
-//  PhotoGalleryViewController.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
@@ -56,11 +50,11 @@ final class PhotoGalleryViewController: UIViewController {
     }
     
     private func setupUI() {
-        title = "Фотографии"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Закрыть",
-                                                          style: .done,
-                                                          target: self,
-                                                          action: #selector(closeButtonTapped))
+        title = "Photos"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Close",
+                                                            style: .done,
+                                                            target: self,
+                                                            action: #selector(closeButtonTapped))
         
         view.backgroundColor = .systemBackground
         view.addSubview(collectionView)
@@ -98,18 +92,18 @@ final class PhotoGalleryViewController: UIViewController {
 }
 
 extension PhotoGalleryViewController: UICollectionViewDataSource,
-                                    UICollectionViewDelegate,
-                                    UICollectionViewDelegateFlowLayout {
+                                      UICollectionViewDelegate,
+                                      UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
-                       numberOfItemsInSection section: Int) -> Int {
+                        numberOfItemsInSection section: Int) -> Int {
         return viewModel.photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell",
-                                                          for: indexPath) as? PhotoCell else {
+                                                            for: indexPath) as? PhotoCell else {
             return UICollectionViewCell()
         }
         
@@ -120,8 +114,8 @@ extension PhotoGalleryViewController: UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView,
-                       layout collectionViewLayout: UICollectionViewLayout,
-                       sizeForItemAt indexPath: IndexPath) -> CGSize {
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (collectionView.bounds.width - 2) / 3
         return CGSize(width: width, height: width)
     }
@@ -180,4 +174,3 @@ extension PhotoGalleryViewController: UICollectionViewDataSourcePrefetching {
         viewModel.cancelPrefetching(urls: urls)
     }
 }
-

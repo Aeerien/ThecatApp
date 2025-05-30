@@ -1,9 +1,3 @@
-//
-//  EmptyStateView.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
@@ -27,7 +21,7 @@ final class EmptyStateView: UIView {
         
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Выберите породу кошки из списка"
+        label.text = "Select a cat breed from the list"
         label.textAlignment = .center
         label.textColor = .systemGray
         label.font = .systemFont(ofSize: 16)
@@ -45,4 +39,3 @@ final class EmptyStateView: UIView {
         ])
     }
 }
-

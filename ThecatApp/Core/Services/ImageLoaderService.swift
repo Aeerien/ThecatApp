@@ -1,24 +1,18 @@
-//
-//  ImageLoaderService.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
-/// Протокол для загрузки изображений
+// Protocol for loading images
 protocol ImageLoaderServiceProtocol {
     func loadImage(from url: String) async throws -> UIImage
 }
 
-/// Протокол для предварительной загрузки изображений
+// Protocol for preloading images
 protocol ImagePrefetchingProtocol: AnyObject {
     func prefetchImages(at urls: [String])
     func cancelPrefetching(at urls: [String])
 }
 
-/// Сервис для загрузки и кэширования изображений
+// Service for loading and caching images
 final class ImageLoaderService: ImageLoaderServiceProtocol, ImagePrefetchingProtocol {
     private let cache: CacheServiceProtocol
     private var prefetchTasks: [String: Task<Void, Never>] = [:]
@@ -46,8 +40,8 @@ final class ImageLoaderService: ImageLoaderServiceProtocol, ImagePrefetchingProt
         
         guard let image = UIImage(data: data) else {
             throw APIError.decodingError(NSError(domain: "ImageLoading",
-                                               code: -1,
-                                               userInfo: [NSLocalizedDescriptionKey: "Invalid image data"]))
+                                                 code: -1,
+                                                 userInfo: [NSLocalizedDescriptionKey: "Invalid image data"]))
         }
         
         cache.saveImage(image, for: url)
@@ -79,4 +73,3 @@ final class ImageLoaderService: ImageLoaderServiceProtocol, ImagePrefetchingProt
         }
     }
 }
-

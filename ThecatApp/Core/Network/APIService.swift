@@ -1,19 +1,12 @@
-//
-//  APIService.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import Foundation
 
-/// Протокол сетевого сервиса
+// Protocol for the network service
 protocol APIServiceProtocol {
-    /// Выполняет запрос к API и декодирует ответ
+    // Performs an API request and decodes the response
     func fetch<T: Decodable>(endpoint: APIEndpoint) async throws -> T
 }
 
-/// Ошибки API
 enum APIError: Error, LocalizedError {
     case invalidURL
     case invalidResponse
@@ -24,20 +17,20 @@ enum APIError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .invalidURL:
-            return "Некорректный URL запроса"
+            return "Invalid request URL"
         case .networkError(let error):
-            return "Ошибка сети: \(error.localizedDescription)"
+            return "Network error: \(error.localizedDescription)"
         case .decodingError(let error):
-            return "Ошибка обработки данных: \(error.localizedDescription)"
+            return "Data processing error: \(error.localizedDescription)"
         case .invalidResponse:
-            return "Некорректный ответ сервера"
+            return "Invalid server response"
         case .noInternetConnection:
-            return "Отсутствует подключение к интернету"
+            return "No internet connection"
         }
     }
 }
 
-/// Сервис для работы с API
+//Service for interacting with the API
 final class APIService: APIServiceProtocol {
     private let session: URLSession
     

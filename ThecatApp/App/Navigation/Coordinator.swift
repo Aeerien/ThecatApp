@@ -1,18 +1,11 @@
-//
-//  Coordinator.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
-/// Координатор отвечает за навигацию и flow в приложении
+// Coordinator is responsible for navigation and flow within the application
 protocol Coordinator: AnyObject {
-    /// Дочерние координаторы
     var childCoordinators: [Coordinator] { get set }
     
-    /// Запускает flow координатора
+    // Starts the coordinator's flow
     func start()
 }
 

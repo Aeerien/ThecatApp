@@ -1,9 +1,3 @@
-//
-//  AppDelegate.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
@@ -11,14 +5,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private var appCoordinator: AppCoordinator?
-
+    
     func application(_ application: UIApplication,
-                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Проверяем, поддерживает ли устройство сцены
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // Check if the device supports scenes
         if #available(iOS 13.0, *) {
             // Используем SceneDelegate для настройки окна
         } else {
-            // Для устройств до iOS 13 настраиваем окно здесь
+            // For devices running iOS versions earlier than 13, configure the window here
             window = UIWindow(frame: UIScreen.main.bounds)
             appCoordinator = AppCoordinator(window: window!)
             appCoordinator?.start()
@@ -36,23 +30,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
         }
     }
-
+    
     // MARK: UISceneSession Lifecycle
     @available(iOS 13.0, *)
     func application(_ application: UIApplication,
-                    configurationForConnecting connectingSceneSession: UISceneSession,
-                    options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+                     configurationForConnecting connectingSceneSession: UISceneSession,
+                     options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default Configuration",
-                                  sessionRole: connectingSceneSession.role)
+                                    sessionRole: connectingSceneSession.role)
     }
-
+    
     @available(iOS 13.0, *)
     func application(_ application: UIApplication,
-                    didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+                     didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
     }
-
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // Очищаем кэш при переходе в фон, чтобы освободить память
+        // Clear cache when entering background to free up memory
         ImageCacheManager.shared.clearCache()
     }
 }

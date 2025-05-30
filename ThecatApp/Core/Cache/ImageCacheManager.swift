@@ -1,16 +1,10 @@
-//
-//  ImageCacheManager.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
-/// Менеджер кэширования изображений (Singleton)
+// Image caching manager (Singleton)
 final class ImageCacheManager {
     static let shared = ImageCacheManager()
-
+    
     private let cache = NSCache<NSString, UIImage>()
     private let fileManager = FileManager.default
     private let cacheDirectory: URL
@@ -32,22 +26,21 @@ final class ImageCacheManager {
         cleanOldFiles()
         
         NotificationCenter.default.addObserver(self,
-            selector: #selector(handleMemoryWarning),
-            name: UIApplication.didReceiveMemoryWarningNotification,
-            object: nil)
+                                               selector: #selector(handleMemoryWarning),
+                                               name: UIApplication.didReceiveMemoryWarningNotification,
+                                               object: nil)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
     
-    /// Обработчик предупреждения о нехватке памяти
+    // Handler for memory warning
     @objc private func handleMemoryWarning() {
         cache.removeAllObjects()
         memoryCacheCount = 0
     }
     
-    /// Очистка старых файлов из кэша
     private func cleanOldFiles() {
         ioQueue.async { [weak self] in
             guard let self = self else { return }
@@ -90,7 +83,6 @@ extension ImageCacheManager: CacheServiceProtocol {
         }
     }
     
-    /// Сохранение изображения в кэш
     func saveImage(_ image: UIImage, for key: String) {
         cache.setObject(image, forKey: key as NSString)
         memoryCacheCount += 1
@@ -102,7 +94,6 @@ extension ImageCacheManager: CacheServiceProtocol {
         }
     }
     
-    /// Удаление изображения из кэша
     func removeImage(for key: String) {
         cache.removeObject(forKey: key as NSString)
         memoryCacheCount -= 1
@@ -114,7 +105,6 @@ extension ImageCacheManager: CacheServiceProtocol {
         }
     }
     
-    /// Полная очистка кэша
     func clearCache() {
         cache.removeAllObjects()
         memoryCacheCount = 0
@@ -123,11 +113,10 @@ extension ImageCacheManager: CacheServiceProtocol {
             guard let self = self else { return }
             try? self.fileManager.removeItem(at: self.cacheDirectory)
             try? self.fileManager.createDirectory(at: self.cacheDirectory,
-                                               withIntermediateDirectories: true)
+                                                  withIntermediateDirectories: true)
         }
     }
     
-    /// Получение информации о состоянии кэша
     func getCacheInfo() -> (memoryCount: Int, diskSize: String) {
         let diskBytes = (try? fileManager.contentsOfDirectory(at: cacheDirectory,
                                                               includingPropertiesForKeys: [.fileSizeKey]))
@@ -144,10 +133,9 @@ extension ImageCacheManager: CacheServiceProtocol {
 }
 
 extension ImageCacheManager {
-    /// Печать состояния кэша (используется в MainViewController)
     func printCacheStatus() {
         let info = getCacheInfo()
-        print("📊 Cache status — memory images: \(info.memoryCount), disk: \(info.diskSize)")
+        print("Cache status — memory images: \(info.memoryCount), disk: \(info.diskSize)")
     }
 }
 

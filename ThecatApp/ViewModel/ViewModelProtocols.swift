@@ -1,19 +1,13 @@
-//
-//  ViewModelProtocols.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
-/// Базовый протокол для всех ViewModel
+// Base protocol for all ViewModels
 protocol BaseViewModelProtocol: AnyObject {
     associatedtype State
     var state: State { get }
 }
 
-/// Протокол для ViewModel списка пород
+// Protocol for the breed list ViewModel
 protocol BreedListViewModelProtocol: BaseViewModelProtocol {
     var breeds: [Breed] { get }
     var breedsCount: Int { get }
@@ -26,25 +20,24 @@ protocol BreedListViewModelProtocol: BaseViewModelProtocol {
     func sortByName()
 }
 
-/// Протокол для ViewModel детальной информации о породе
+// Protocol for the breed detail ViewModel
 protocol BreedDetailViewModelProtocol: BaseViewModelProtocol {
     var breed: Breed? { get }
     var breedImage: UIImage? { get }
-
+    
     func setBreed(_ breed: Breed)
 }
 
-/// Делегат для обновления UI при изменениях в BreedDetailViewModel
+// Delegate for updating the UI when changes occur in the BreedDetailViewModel
 protocol BreedDetailViewModelDelegate: AnyObject {
     func didStartLoadingImage()
     func didUpdateBreedImage()
     func didReceiveError(_ error: Error)
 }
 
-/// Протокол для ViewModel галереи фотографий
+// Protocol for the photo gallery ViewModel
 protocol PhotoGalleryViewModelProtocol: BaseViewModelProtocol {
     var photos: [BreedImage] { get }
-
+    
     func loadNextPage() async
 }
-

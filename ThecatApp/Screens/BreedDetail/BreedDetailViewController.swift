@@ -1,9 +1,3 @@
-//
-//  BreedDetailViewController.swift
-//  ThecatApp
-//
-//  Created by Irina Arkhireeva on 15.05.2025.
-//
 
 import UIKit
 
@@ -60,12 +54,12 @@ final class BreedDetailViewController: UIViewController {
         return stack
     }()
     
-    private lazy var energyLevelView = StatView(title: "Энергичность")
-    private lazy var intelligenceView = StatView(title: "Интеллект")
+    private lazy var energyLevelView = StatView(title: "Energy")
+    private lazy var intelligenceView = StatView(title: "Intelligence")
     
     private lazy var wikiButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Википедия", for: .normal)
+        button.setTitle("Wikipedia", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(wikiButtonTapped), for: .touchUpInside)
         return button
@@ -73,7 +67,7 @@ final class BreedDetailViewController: UIViewController {
     
     private lazy var photosButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Смотреть фотографии", for: .normal)
+        button.setTitle("Watch photos", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(photosButtonTapped), for: .touchUpInside)
         return button
@@ -206,7 +200,6 @@ extension BreedDetailViewController: BreedDetailViewModelDelegate {
     
     func didUpdateBreedImage() {
         guard let image = viewModel.breedImage else {
-            // если изображения нет – покажем состояние ошибки/плейсхолдер
             breedImageContainer.showError()
             return
         }
@@ -225,4 +218,3 @@ extension BreedDetailViewController: BreedImageContainerViewDelegate {
         viewModel.setBreed(breed)
     }
 }
-
